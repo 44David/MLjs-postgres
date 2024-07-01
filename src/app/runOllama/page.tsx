@@ -2,6 +2,14 @@ import ollama from 'ollama'
 
 export default async function runOllama() { 
   getResponse()
+  return (
+    
+    <form className='justify-copntent-center'>
+      <textarea placeholder='Start a conversation'></textarea>
+    </form>
+
+  )
+
 }
 
 async function getResponse() {
