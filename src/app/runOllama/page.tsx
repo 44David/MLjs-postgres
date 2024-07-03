@@ -1,3 +1,5 @@
+'use client'
+
 import ollama, { Message } from 'ollama'
 import { FormEvent } from 'react'
 
@@ -10,7 +12,15 @@ export default function runOllama() {
 
     const formData = new FormData(event.currentTarget);
 
-    console.log(formData)
+    const response = await fetch('/api/runOllama', {
+      method: 'POST',
+      body: formData,
+    })
+
+    const data = await response
+
+    console.log(data)
+
 
     // const response = await ollama.chat({
     //   model: 'llama2',
@@ -19,8 +29,10 @@ export default function runOllama() {
     
   }
   return (
-    <form onSubmit={onSubmit} className='justify-copntent-center' >
-      <textarea placeholder='Start a conversation' name='input-text'></textarea>
+    <form onSubmit={onSubmit}>
+      {/* <textarea placeholder='Start a conversation' name='input-text'></textarea> */}
+
+      <input type="text" name='text-input'/>
       <button type='submit'>Enter</button>
     </form>
 
