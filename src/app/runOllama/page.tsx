@@ -1,22 +1,29 @@
-import ollama from 'ollama'
+import ollama, { Message } from 'ollama'
+import { FormEvent } from 'react'
 
-export default async function runOllama() { 
-  getResponse()
-  return (
+
+export default function runOllama() { 
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {  
+
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+
+    console.log(formData)
+
+    // const response = await ollama.chat({
+    //   model: 'llama2',
+    //   messages: [{role: 'user', content: formData}],
+    // })
     
-    <form className='justify-copntent-center'>
-      <textarea placeholder='Start a conversation'></textarea>
+  }
+  return (
+    <form onSubmit={onSubmit} className='justify-copntent-center' >
+      <textarea placeholder='Start a conversation' name='input-text'></textarea>
+      <button type='submit'>Enter</button>
     </form>
 
   )
 
-}
-
-async function getResponse() {
-  const response = await ollama.chat({
-    model: 'llama2', 
-    messages: [{ role: 'user', content: 'Why is the sky blue?' }],
-  })
-
-  console.log(response.message.content)
 }
