@@ -2,11 +2,12 @@
 
 import ollama, { Message } from 'ollama'
 import { FormEvent } from 'react'
-
+import { z } from 'zod'
+  
 
 export default function runOllama() { 
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {  
+  async function onSubmit(event:any) {  
 
     event.preventDefault();
 
@@ -16,10 +17,6 @@ export default function runOllama() {
       method: 'POST',
       body: formData,
     })
-
-    const data = await response
-
-    console.log(data)
 
 
     // const response = await ollama.chat({
