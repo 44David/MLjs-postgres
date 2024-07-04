@@ -4,13 +4,15 @@ import ollama from 'ollama'
 export async function POST(req: NextRequest) {
     const data = req.body
 
-    const message:any = [{ role: 'user', content: data}]
+    //const message:any = [{ role: 'user', content: data}]
 
     const response = await ollama.chat({
       model: 'llama2',
-      messages: message,
+      messages: [{role: 'user', content: 'Name some fruits!'}],
     })
 
-    return NextResponse.json({Response: "hello"})
+    // console.log(response.message.content);
+
+    return NextResponse.json({'response': response.message.content});
 
 }
