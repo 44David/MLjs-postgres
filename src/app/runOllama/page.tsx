@@ -29,29 +29,30 @@ export default function runOllama() {
 
     setResponse(result);
 
-    // console.log('######### Response: ', response);
     
   }
   return (
-    <form onSubmit={onSubmit}>
-
-      <input 
-      type="text" 
-      name='textinput' 
-      value={userInput}
-      onChange={(e) => {
-        setUserInput(e.target.value)
-      }}
-      />
-
-
-      <button type='submit'>Enter</button>
-      <h2>{response}</h2>
-
+    <>
+      <h3>Performance will vary greatly on local hardware.</h3>
+      <form onSubmit={onSubmit}>
+        <input 
+        className='border-4 border-black  '
+        placeholder='Start chatting'
+        type="text" 
+        name='textinput' 
+        value={userInput}
+        onChange={(e) => {
+          setUserInput(e.target.value)
+        }}
+        />
 
 
-      
-    </form>
+        <button type='submit'>Enter</button>
+        <h2>{response}</h2>
+      </form>
+    
+    </>
+
 
   )
 

@@ -21,7 +21,8 @@ export default function Models() {
 
             <div className='p-4 outline w-1/4 gap-2 outline-gray-500 rounded-sm'>
                 <h2 className='font-bold'>Llama 3</h2>
-                <h3>Base Size: 10GB</h3>
+                <h3>Size: 10GB-70GB</h3>
+                <h3>Context Length: 70B</h3>
                 <h3>Number of Variations: 3</h3>
                 <Button onClick={handleRedirect}>Pull Locally</Button>
                 <Button>Pull on Servers</Button>
@@ -36,5 +37,5 @@ export default function Models() {
 }
 
 const pullLocal = () => {
-    ollama.pull()
+    console.log('hello')
 }
