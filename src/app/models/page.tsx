@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 
 
 
+
 export default function Models() {
 
 
@@ -32,4 +33,8 @@ export default function Models() {
 
     )
     
+}
+
+const pullLocal = () => {
+    ollama.pull()
 }

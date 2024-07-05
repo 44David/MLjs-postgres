@@ -7,18 +7,22 @@ import { useState } from 'react'
   
 
 export default function runOllama() { 
+  const [userInput, setUserInput] = useState('');
   const [response, setResponse] = useState('');
+
   
 
   async function onSubmit(event:any) {  
 
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
+    // const formData = new FormData(event.currentTarget);
+
+    console.log("e.currentTarget: ", userInput)
 
     const res = await fetch('/api/runOllama', {
       method: 'POST',
-      body: formData,
+      body: userInput,
     });
 
     const result:any = await res.text();
@@ -31,7 +35,16 @@ export default function runOllama() {
   return (
     <form onSubmit={onSubmit}>
 
-      <input type="text" defaultValue='Why is the sky blue?' name='text-input'/>
+      <input 
+      type="text" 
+      name='textinput' 
+      value={userInput}
+      onChange={(e) => {
+        setUserInput(e.target.value)
+      }}
+      />
+
+
       <button type='submit'>Enter</button>
       <h2>{response}</h2>
 
