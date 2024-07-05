@@ -9,9 +9,8 @@ import {
 
 export const db = drizzle(sql);
 
-
-export const ExampleTable = pgTable(
-  'models',
+export const models = pgTable(
+  'model',
   {
     id: serial('id').primaryKey(),
     model_name: text('model_name').notNull(),
