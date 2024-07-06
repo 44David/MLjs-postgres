@@ -1,6 +1,7 @@
 import ollama from 'ollama'
 import { Button } from "@/components/ui/button"
 import { db } from "@/server/db";
+import Link from 'next/link';
 
 export default function Models() {
     const handleRedirect = () => {
@@ -10,15 +11,10 @@ export default function Models() {
     return (
         <>
             <h1>Currently available models:</h1>
+            <ShowModels></ShowModels>
 
-            <div className='p-4 outline w-1/4 gap-2 outline-gray-500 rounded-sm'>
-                <ShowModels></ShowModels>
-                <Button>Pull Locally</Button>
-                <Button>Pull on Servers</Button>
-                <Button>More Info</Button>
-            </div>
         </>
-    )
+    )   
 }
 
     async function ShowModels() {
@@ -26,10 +22,16 @@ export default function Models() {
         return (
             modelsInfo.map(modelInfo => (
                 <>
-                    <h2 className='font-bold'>{modelInfo.model_name}</h2>
-                    <h3>Size: {modelInfo.size}</h3>
-                    <h3>Context Length: {modelInfo.context_length}</h3>
-                    <h3>Number of Variations: {modelInfo.variations}</h3>
+                    <div className='p-4 outline w-1/4 gap-2 outline-gray-500 rounded-sm mb-4' key={modelInfo.id}>
+                        <h2 className='font-bold'>{modelInfo.model_name}</h2>
+                        <h3>Size: {modelInfo.size}</h3>
+                        <h3>Context Length: {modelInfo.context_length}</h3>
+                        <h3>Number of Variations: {modelInfo.variations}</h3>
+
+                        <Button>Pull Locally</Button>
+                        <Button>Pull on Servers</Button>
+                        <Button><Link href={`http://localhost:3000/models/${modelInfo.id}`}>More Info</Link></Button>
+                    </div>
                 </>
             ))
         )
