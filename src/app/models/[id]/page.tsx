@@ -27,11 +27,8 @@ export default async function ModelInfo({ params }) {
     console.log(parsedModelInfo)
     return (
         <>
-        
             <h1>{parsedModelInfo[0].model_name}</h1>
             <h1>{parsedModelInfo[0].variations}</h1>
-        
         </>
-
         )  
 }

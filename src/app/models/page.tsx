@@ -4,17 +4,11 @@ import { db } from "@/server/db";
 import Link from 'next/link';
 
 export default function Models() {
-    const handleRedirect = () => {
-        location.href = "models/install"
-    }
-
     return (
         <>
             <h1 className='font-bold text-7xl mb-4'>Currently available models</h1>
             <div className="grid gap-4 grid-cols-3 grid-rows-3">
-
                     <ShowModels></ShowModels>
-
             </div>
             
 
@@ -34,16 +28,10 @@ export default function Models() {
                         <h3>Size: {modelInfo.size}</h3>
                         <h3>Context Length: {modelInfo.context_length}</h3>
                         <h3>Number of Variations: {modelInfo.variations}</h3>
-                        <Button className='mr-2'>Pull Locally</Button>
+                        <Link href={`models/install/${modelInfo.id}`}><Button className='mr-2'>Pull Locally</Button></Link>
                         <Button>Pull on Servers</Button>
-                        {/* <Button><Link href={`http://localhost:3000/models/${modelInfo.id}`}>More Info</Link></Button> */}
                     </div>
                 </>
             ))
         )
     }
-
-
-const pullLocal = () => {
-    console.log('hello')
-}
