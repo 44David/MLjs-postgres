@@ -14,6 +14,13 @@ async function getModel(id:any) {
     return modelData
 } 
 
+async function fetchFiles() {
+    const res = await fetch('/f{cluster}.backblazeb2.com/file/{bucket name}/{folder name}/{file}');
+
+
+
+}
+
 //@ts-ignore
 export  default async function Pull({ params }) {
 

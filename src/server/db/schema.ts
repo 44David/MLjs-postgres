@@ -25,15 +25,19 @@ export const models = pgTable(
 export const Users = pgTable(
   'Users', 
   {
-    id: uuid('id').primaryKey().defaultRandom().unique().notNull(),
+    id: uuid('id')
+    .primaryKey()
+    .defaultRandom()
+    .unique()
+    .notNull(),
     // get these values from Clerk authentication API 
     username: text('username').notNull(),
-    createdAt: timestamp('createdAt').defaultNow().notNull(),
+    openChats: text('open-chats').array(),
+    installedModels: text('installed-models').array(),
+    createdAt: timestamp('createdAt')
+      .defaultNow()
+      .notNull(),
+    
 
   }
 )
-
-// export const getExampleTable = async () => {
-//   const selectResult = await db.select().from(ExampleTable);
-//   console.log('Results', selectResult);
-// };
