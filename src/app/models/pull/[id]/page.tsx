@@ -15,7 +15,7 @@ async function getModel(id:any) {
 } 
 
 //@ts-ignore
-export  default async function Install({ params }) {
+export  default async function Pull({ params }) {
 
     const modelInfo = await getModel(params.id)
     const parsedModelInfo = JSON.parse(JSON.stringify(modelInfo))
