@@ -27,7 +27,7 @@ export default function Models() {
         return (
             modelsInfo.map(modelInfo => (
                 <>
-                    <div className='p-4 outline w-full outline-gray-500 rounded-sm' key={modelInfo.id}>
+                    <div className='p-4 outline w-full outline-gray-500 rounded-sm'>
                         <Link href={`/models/${modelInfo.id}`}>
                             {modelInfo.model_name}
                         </Link>
@@ -42,6 +42,7 @@ export default function Models() {
             ))
         )
     }
+
 
 const pullLocal = () => {
     console.log('hello')
