@@ -10,7 +10,7 @@ export default function Models() {
 
     return (
         <>
-            <h1>Currently available models:</h1>
+            <h1 className='font-bold text-7xl mb-4'>Currently available models</h1>
             <div className="grid gap-4 grid-cols-3 grid-rows-3">
 
                     <ShowModels></ShowModels>
