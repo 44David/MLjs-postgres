@@ -4,6 +4,10 @@ import { z } from 'zod';
 import { useState } from 'react';
 import { db } from "@/server/db";
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+
+import { ChevronRight } from 'lucide-react';
 
 export default function Prompts() { 
   const [userInput, setUserInput] = useState('');
@@ -25,30 +29,42 @@ export default function Prompts() {
     const result:any = await res.text();
 
     setResponse(result);
-
-    
   }
   return (
     <>
-      
       <div className="float-left border-r-2 h-screen w-1/6 pr-10">
         User conversations here
 
         <p className="fixed bottom-0 text-xs">Performance varies <br></br>greatly on local hardware</p>
       </div>
 
-      <form>
-        
-        <input 
-        className='border-4 border-black fixed bottom-0 w-full p-5 rounded-full'
+
+      <form onSubmit={onSubmit}>  
+
+      <div className="flex w-full max-w-sm items-center space-x-2">
+        <Input type='text' 
+          placeholder='Start chatting'
+          name='textinput' 
+          value={userInput}
+          onChange={(e) => {
+            setUserInput(e.target.value)
+          }}
+        />
+        <Button variant="outline" size='icon' className='bg-blue-600'>
+          <ChevronRight className='h-4 w-4' />
+        </Button>
+      </div>
+
+
+        {/* <input 
+        className='border-4 ml-2 border-grey fixed bottom-2 w-1/2 p-3 rounded-xl'
         placeholder='Start chatting'
         type="text" 
-        name='textinput' 
-        value={userInput}
-        onChange={(e) => {
-          setUserInput(e.target.value)
-        }}
-        />
+        
+        
+
+        /> */}
+
         <h2>{response}</h2>
       </form>
     

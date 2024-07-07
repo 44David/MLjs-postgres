@@ -17,8 +17,6 @@ async function getModel(id:any) {
 async function fetchFiles() {
     const res = await fetch('/f{cluster}.backblazeb2.com/file/{bucket name}/{folder name}/{file}');
 
-
-
 }
 
 //@ts-ignore

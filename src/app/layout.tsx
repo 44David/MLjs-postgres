@@ -27,7 +27,9 @@ function Navbar() {
       </SignedOut>
 
       <SignedIn>
-        <Link href='/models'>Your models</Link>
+        <Link href='/models'>Models</Link>
+        <Link href='/profile'>Profile</Link>
+        <Link href='/prompts'>Instances</Link>
         <UserButton />
       </SignedIn>
 
