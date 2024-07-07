@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { db } from "@/server/db";
 import Link from 'next/link';
 
-export default function runOllama() { 
+export default function Prompts() { 
   const [userInput, setUserInput] = useState('');
   const [response, setResponse] = useState('');
 
@@ -17,7 +17,7 @@ export default function runOllama() {
 
     console.log("e.currentTarget: ", userInput)
 
-    const res = await fetch('/api/runOllama', {
+    const res = await fetch('/api/prompts', {
       method: 'POST',
       body: userInput,
     });

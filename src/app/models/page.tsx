@@ -11,7 +11,12 @@ export default function Models() {
     return (
         <>
             <h1>Currently available models:</h1>
-            <ShowModels></ShowModels>
+            <div className="grid gap-4 grid-cols-3 grid-rows-3">
+
+                    <ShowModels></ShowModels>
+
+            </div>
+            
 
         </>
     )   
@@ -22,15 +27,14 @@ export default function Models() {
         return (
             modelsInfo.map(modelInfo => (
                 <>
-                    <div className='p-4 outline w-1/4 gap-2 outline-gray-500 rounded-sm mb-4' key={modelInfo.id}>
+                    <div className='p-4 outline w-full outline-gray-500 rounded-sm' key={modelInfo.id}>
                         <Link href={`/models/${modelInfo.id}`}>
                             {modelInfo.model_name}
                         </Link>
                         <h3>Size: {modelInfo.size}</h3>
                         <h3>Context Length: {modelInfo.context_length}</h3>
                         <h3>Number of Variations: {modelInfo.variations}</h3>
-
-                        <Button>Pull Locally</Button>
+                        <Button className='mr-2'>Pull Locally</Button>
                         <Button>Pull on Servers</Button>
                         {/* <Button><Link href={`http://localhost:3000/models/${modelInfo.id}`}>More Info</Link></Button> */}
                     </div>
