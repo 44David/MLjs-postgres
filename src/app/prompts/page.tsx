@@ -52,63 +52,67 @@ export default function Prompts() {
   return (
     <>
 
+    <div className="float-left border-r-2 h-screen w-1/6 pr-10 place-content-center">
+      <Dialog>
 
-    <Dialog>
-      <DialogTrigger><Button variant={"outline"} size={'icon'} className=''> <SquarePlus className='h-10 w-full' /></Button></DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Select a model to start an instance</DialogTitle>
-          <DialogDescription>
-            You will be charged accordingly
-          </DialogDescription>
-        </DialogHeader>
-        <Select>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Installed Models" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="Llama3">Llama3</SelectItem>
-            <SelectItem value="Mistral AI">Mistral AI</SelectItem>
-            <SelectItem value="Gemma">Gemma</SelectItem>
-          </SelectContent>
-        </Select>
-        <Button>Build</Button>
-      </DialogContent>
-    </Dialog>
+        <DialogTrigger><Button variant={"outline"} size={'icon'} className=''> <SquarePlus className='h-10 w-full' /></Button></DialogTrigger>
+
+        <DialogContent>
+
+          <DialogHeader>
+
+            <DialogTitle>Select a model to start an instance</DialogTitle>
+
+            <DialogDescription>
+              Instances will vary in speed depending on hardware.
+            </DialogDescription>
+
+          </DialogHeader>
+
+          <Select>
+
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Installed Models" />
+            </SelectTrigger>
+            
+            <SelectContent>
+              <SelectItem value="Llama3">Llama3</SelectItem>
+              <SelectItem value="Mistral AI">Mistral AI</SelectItem>
+              <SelectItem value="Gemma">Gemma</SelectItem>
+
+            </SelectContent>
+          </Select>
+
+          <Button type='submit'>Build</Button>
+
+        </DialogContent>
+
+      </Dialog>
+    </div>
 
 
 
-      <div className="float-left border-r-2 h-screen w-1/6 pr-10 place-content-center">
-        {/* <Button variant={"outline"} size={'icon'} className=''> <SquarePlus className='h-10 w-full' /></Button> */}
-        <p className="fixed bottom-0 text-xs">Performance varies <br></br>greatly on local hardware</p>
-      </div>
+    <p className="fixed bottom-0 text-xs">Performance varies <br></br>greatly on local hardware</p>
+
 
 
       <form onSubmit={onSubmit}>  
 
-      <div className="flex w-full max-w-sm items-center space-x-2">
-        <Input type='text' 
-          placeholder='Start chatting'
-          name='textinput' 
-          value={userInput}
-          onChange={(e) => {
-            setUserInput(e.target.value)
-          }}
-        />
-        <Button variant="outline" size='icon' className='bg-blue-600'>
-          <ChevronRight className='h-4 w-4' />
-        </Button>
-      </div>
+        <div className="flex w-full max-w-sm items-center space-x-2">
+          <Input type='text' 
+            placeholder='Start chatting'
+            name='textinput' 
+            value={userInput}
+            onChange={(e) => {
+              setUserInput(e.target.value)
+            }}
+          />
+          <Button variant="outline" size='icon' className='bg-blue-600'>
+            <ChevronRight className='h-4 w-4' />
+          </Button>
+        </div>
 
-
-        {/* <input 
-        className='border-4 ml-2 border-grey fixed bottom-2 w-1/2 p-3 rounded-xl'
-        placeholder='Start chatting'
-        type="text" 
-      
-        /> */}
-
-      { response }
+        { response }
       </form>
     
     </>

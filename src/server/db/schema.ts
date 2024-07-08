@@ -8,6 +8,7 @@ import {
   uuid,
 } from 'drizzle-orm/pg-core';
 
+
 export const db = drizzle(sql);
 
 export const models = pgTable(
@@ -21,6 +22,8 @@ export const models = pgTable(
     createdAt: timestamp('createdAt').defaultNow().notNull(),
   },
 );
+
+
 
 export const Users = pgTable(
   'Users', 

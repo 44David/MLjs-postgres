@@ -9,6 +9,8 @@ import {
   UserButton
 } from '@clerk/nextjs'
 import Link from "next/link";
+import { auth, currentUser } from "@clerk/nextjs/server";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +19,12 @@ export const metadata: Metadata = {
   description: "Run LLM's in the browser",
 };
 
-function Navbar() {
+async function Navbar() {
+  const { userId } = auth()
+
+  const user = await currentUser()
+
+
   return (
     <nav className="flex items-center justify-between w-full p-4 mb-4 text-xl font-semibold border-b-4">
       <Link href={'/'}><div>MLjs</div></Link>
@@ -28,7 +35,7 @@ function Navbar() {
 
       <SignedIn>
         <Link href='/models'>Models</Link>
-        <Link href='/profile'>Profile</Link>
+        <Link href='/profile'>{user?.username || user?.firstName}</Link>
         <Link href='/prompts'>Instances</Link>
         <UserButton />
       </SignedIn>
