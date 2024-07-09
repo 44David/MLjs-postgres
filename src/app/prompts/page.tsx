@@ -23,6 +23,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+import React from 'react'
+
 import { ChevronRight } from 'lucide-react';
 import { SquarePlus } from 'lucide-react';
  
@@ -49,50 +51,73 @@ export default function Prompts() {
 
     
   }
+
+  const [open, setOpen] = React.useState(false);
+
+  const wait = () => new Promise((resolve) => setTimeout(resolve, 500));
+
   return (
+
     <>
 
-    <div className="float-left border-r-2 h-screen w-1/6 pr-10 place-content-center">
-      <Dialog>
-
-        <DialogTrigger><Button variant={"outline"} size={'icon'} className=''> <SquarePlus className='h-10 w-full' /></Button></DialogTrigger>
-
-        <DialogContent>
-
-          <DialogHeader>
-
-            <DialogTitle>Select a model to start an instance</DialogTitle>
-
-            <DialogDescription>
-              Instances will vary in speed depending on hardware.
-            </DialogDescription>
-
-          </DialogHeader>
-
-          <Select>
-
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Installed Models" />
-            </SelectTrigger>
-            
-            <SelectContent>
-              <SelectItem value="Llama3">Llama3</SelectItem>
-              <SelectItem value="Mistral AI">Mistral AI</SelectItem>
-              <SelectItem value="Gemma">Gemma</SelectItem>
-
-            </SelectContent>
-          </Select>
-
-          <Button type='submit'>Build</Button>
-
-        </DialogContent>
-
-      </Dialog>
-    </div>
+      {/* <div className="float-left border-r-2 h-screen w-1/6 pr-10 place-content-center"> */}
+    
+          <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger><SquarePlus /></DialogTrigger>
 
 
 
-    <p className="fixed bottom-0 text-xs">Performance varies <br></br>greatly on local hardware</p>
+            <DialogContent>
+
+              <DialogHeader>
+
+                <DialogTitle>Select a model to start an instance</DialogTitle>
+
+                <DialogDescription>
+                  Instances will vary in speed depending on hardware.
+                </DialogDescription>
+
+              </DialogHeader>
+
+            <form
+              onSubmit={(event) => {
+                wait().then(() => setOpen(false));
+                event.preventDefault()
+                console.log('Hello')
+
+              }}
+            >              
+
+                <Select>
+
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Installed Models" />
+                  </SelectTrigger>
+                  
+                  
+                    <SelectContent>
+                      <SelectItem value="Llama3">Llama3</SelectItem>
+                      <SelectItem value="Mistral AI">Mistral AI</SelectItem>
+                      <SelectItem value="Gemma">Gemma</SelectItem>
+
+                    </SelectContent>
+                  
+                </Select>
+
+                <Button type='submit'>Build</Button>
+              
+
+            </form>
+
+            </DialogContent>
+
+
+          </Dialog>
+      {/* </div> */}
+
+
+
+      <p className="fixed bottom-0 text-xs">Performance varies <br></br>greatly on local hardware</p>
 
 
 
