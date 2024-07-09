@@ -20,7 +20,9 @@ import { toast } from "sonner"
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
@@ -38,6 +40,7 @@ import {
 export default function Prompts() { 
   const [userInput, setUserInput] = useState('');
   const [response, setResponse] = useState('');
+  const [instanceModel, setInstanceModel] = useState('')
 
   async function onSubmit(event:any) {  
 
@@ -56,7 +59,6 @@ export default function Prompts() {
 
     response ? setResponse(result) : setResponse('Loading...')
 
-    
   }
 
   const [open, setOpen] = React.useState(false);
@@ -93,10 +95,12 @@ export default function Prompts() {
                     onClick: () => console.log()
                   }
                 })
+
+                console.log(instanceModel)
               }}
             >              
 
-                <Select>
+                <Select value={instanceModel} onValueChange={setInstanceModel}>
 
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Installed Models" />
@@ -104,9 +108,21 @@ export default function Prompts() {
                   
                   
                     <SelectContent>
-                      <SelectItem value="Llama3">Llama3</SelectItem>
-                      <SelectItem value="Mistral AI">Mistral AI</SelectItem>
-                      <SelectItem value="Gemma">Gemma</SelectItem>
+
+                      <SelectGroup>
+                        <SelectLabel>Default Models</SelectLabel>
+                        <SelectItem value="Llama3">Llama3</SelectItem>
+                        <SelectItem value="Mistral AI">Mistral AI</SelectItem>
+                        <SelectItem value="Gemma">Gemma</SelectItem>
+                      </SelectGroup>
+
+                      <SelectGroup>
+                        <SelectLabel>Your Models</SelectLabel>
+
+
+                      </SelectGroup>
+
+
 
                     </SelectContent>
                   
