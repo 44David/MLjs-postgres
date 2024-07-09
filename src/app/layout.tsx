@@ -12,6 +12,8 @@ import Link from "next/link";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { Toaster } from "@/components/ui/sonner";
 
+import { Zap, Bot } from 'lucide-react';
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +29,7 @@ async function Navbar() {
 
 
   return (
-    <nav className="flex items-center justify-between w-full p-4 mb-4 text-xl font-semibold border-b-4">
+    <nav className="flex justify-between w-full p-4 mb-4 text-xl font-semibold border-b-4">
       <Link href={'/'}><div>MLjs</div></Link>
 
       <SignedOut>
@@ -35,8 +37,14 @@ async function Navbar() {
       </SignedOut>
 
       <SignedIn>
-        <Link href='/models'>Models</Link>
-        <Link href='/prompts'>Instances</Link>
+        <Link href={'/models'}>
+          <div>Models <Bot /></div>
+        </Link>
+
+        <Link href={'/prompts'}> 
+          Instances <Zap /> 
+        </Link>
+
         <UserButton />
       </SignedIn>
 
