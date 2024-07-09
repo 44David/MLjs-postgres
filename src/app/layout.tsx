@@ -10,6 +10,7 @@ import {
 } from '@clerk/nextjs'
 import Link from "next/link";
 import { auth, currentUser } from "@clerk/nextjs/server";
+import { Toaster } from "@/components/ui/sonner";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -35,7 +36,6 @@ async function Navbar() {
 
       <SignedIn>
         <Link href='/models'>Models</Link>
-        <Link href='/profile'>{user?.username || user?.firstName}</Link>
         <Link href='/prompts'>Instances</Link>
         <UserButton />
       </SignedIn>
@@ -56,7 +56,7 @@ export default function RootLayout({
 
           <Navbar />
           {children}
-        
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

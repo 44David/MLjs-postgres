@@ -15,6 +15,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
+import { toast } from "sonner"
+
 import {
   Select,
   SelectContent,
@@ -25,9 +27,14 @@ import {
 
 import React from 'react'
 
-import { ChevronRight } from 'lucide-react';
-import { SquarePlus } from 'lucide-react';
- 
+import { 
+  ChevronRight, 
+  SquarePlus, 
+  Zap,
+  X,
+
+} from 'lucide-react';
+
 export default function Prompts() { 
   const [userInput, setUserInput] = useState('');
   const [response, setResponse] = useState('');
@@ -57,15 +64,12 @@ export default function Prompts() {
   const wait = () => new Promise((resolve) => setTimeout(resolve, 500));
 
   return (
-
     <>
 
-      {/* <div className="float-left border-r-2 h-screen w-1/6 pr-10 place-content-center"> */}
+      <div className="float-left border-r-2 h-screen w-1/6 pr-10">
     
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger><SquarePlus /></DialogTrigger>
-
-
 
             <DialogContent>
 
@@ -83,8 +87,12 @@ export default function Prompts() {
               onSubmit={(event) => {
                 wait().then(() => setOpen(false));
                 event.preventDefault()
-                console.log('Hello')
-
+                toast("Instance created successfully", {
+                  action: {
+                    label: <X className='h-4 w-4' />,
+                    onClick: () => console.log()
+                  }
+                })
               }}
             >              
 
@@ -104,7 +112,9 @@ export default function Prompts() {
                   
                 </Select>
 
-                <Button type='submit'>Build</Button>
+                <Button type='submit' className='mt-2'>
+                  <Zap className='mr-2 h-4 w-4'/> Build
+                </Button>
               
 
             </form>
@@ -113,11 +123,13 @@ export default function Prompts() {
 
 
           </Dialog>
-      {/* </div> */}
+      </div>
 
 
 
       <p className="fixed bottom-0 text-xs">Performance varies <br></br>greatly on local hardware</p>
+
+      
 
 
 
