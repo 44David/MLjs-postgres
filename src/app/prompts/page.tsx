@@ -6,6 +6,7 @@ import { db } from "@/server/db";
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import nim from '@api/nim';
 import {
   Dialog,
   DialogContent,
@@ -117,6 +118,14 @@ export default function Prompts() {
                       </SelectGroup>
 
                       <SelectGroup>
+                        <SelectLabel>NVIDIA Nim Models</SelectLabel>
+                        <SelectItem value='stable-video-diffusion'>stable-video-diffusion</SelectItem>
+                        <SelectItem value='kosmos-2'>kosmos-2</SelectItem>
+                        <SelectItem value='cuopt'>cuopt</SelectItem>
+                        <SelectItem value='mistral-large'>mistral-large</SelectItem>
+                      </SelectGroup>
+
+                      <SelectGroup>
                         <SelectLabel>Your Models</SelectLabel>
 
 
@@ -170,6 +179,24 @@ export default function Prompts() {
     
     </>
   )
+
+  // sample API request 
+  function nvidiaNimAPI() {
+    nim.create_chat_completion_v1_chat_completions_post({
+      model: 'google/gemma-7b',
+      max_tokens: 1024,
+      stream: false,
+      temperature: 0.3,
+      top_p: 1,
+      stop: null,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+      seed: null,
+      messages: 'string'
+    })
+      .then(({ data }) => console.log(data))
+      .catch(err => console.error(err));
+  }
 
   // async function FetchModelData() {
 
