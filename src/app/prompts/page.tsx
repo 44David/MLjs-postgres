@@ -6,7 +6,6 @@ import { db } from "@/server/db";
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import nim from '@api/nim';
 import {
   Dialog,
   DialogContent,
@@ -43,6 +42,8 @@ export default function Prompts() {
   const [response, setResponse] = useState('');
   const [instanceModel, setInstanceModel] = useState('')
 
+
+
   async function onSubmit(event:any) {  
 
     event.preventDefault();
@@ -56,10 +57,20 @@ export default function Prompts() {
       body: userInput,
     });
 
-    const result:any = res.text();
+    const result:Promise<string> = res.text();
 
-    response ? setResponse(result) : setResponse('Loading...')
+    //response ? setResponse( await result) : setResponse('Loading...')
+    setResponse(await result)
+  }
 
+  async function instanceSubmit(event:any) {
+
+    event.preventDefault();
+
+    await fetch('/api/prompts', {
+      method: 'POST', 
+      body: instanceModel,
+    })
   }
 
   const [open, setOpen] = React.useState(false);
@@ -73,17 +84,12 @@ export default function Prompts() {
     
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger><SquarePlus /></DialogTrigger>
-
             <DialogContent>
-
               <DialogHeader>
-
                 <DialogTitle>Select a model to start an instance</DialogTitle>
-
                 <DialogDescription>
                   Instances will vary in speed depending on hardware.
                 </DialogDescription>
-
               </DialogHeader>
 
             <form
@@ -96,7 +102,7 @@ export default function Prompts() {
                     onClick: () => console.log()
                   }
                 })
-
+                instanceSubmit(event)
                 console.log(instanceModel)
               }}
             >              
@@ -106,7 +112,6 @@ export default function Prompts() {
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Installed Models" />
                   </SelectTrigger>
-                  
                   
                     <SelectContent>
 
@@ -127,36 +132,26 @@ export default function Prompts() {
 
                       <SelectGroup>
                         <SelectLabel>Your Models</SelectLabel>
-
-
                       </SelectGroup>
-
-
-
                     </SelectContent>
-                  
                 </Select>
-
                 <Button type='submit' className='mt-2'>
                   <Zap className='mr-2 h-4 w-4'/> Build
                 </Button>
-              
-
             </form>
-
             </DialogContent>
-
-
           </Dialog>
+
+
+
+          <div className='border border-gray-400 w-full'>
+            {instanceModel}
+          </div>
       </div>
 
 
 
       <p className="fixed bottom-0 text-xs">Performance varies <br></br>greatly on local hardware</p>
-
-      
-
-
 
       <form onSubmit={onSubmit}>  
 
@@ -174,29 +169,29 @@ export default function Prompts() {
           </Button>
         </div>
 
-        { response }
+        <pre>{ response }</pre>
       </form>
     
     </>
   )
 
   // sample API request 
-  function nvidiaNimAPI() {
-    nim.create_chat_completion_v1_chat_completions_post({
-      model: 'google/gemma-7b',
-      max_tokens: 1024,
-      stream: false,
-      temperature: 0.3,
-      top_p: 1,
-      stop: null,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-      seed: null,
-      messages: 'string'
-    })
-      .then(({ data }) => console.log(data))
-      .catch(err => console.error(err));
-  }
+  // function nvidiaNimAPI() {
+  //   nim.create_chat_completion_v1_chat_completions_post({
+  //     model: 'google/gemma-7b',
+  //     max_tokens: 1024,
+  //     stream: false,
+  //     temperature: 0.3,
+  //     top_p: 1,
+  //     stop: null,
+  //     frequency_penalty: 0,
+  //     presence_penalty: 0,
+  //     seed: null,
+  //     messages: 'string'
+  //   })
+  //     .then(({ data }) => console.log(data))
+  //     .catch(err => console.error(err));
+  // }
 
   // async function FetchModelData() {
 

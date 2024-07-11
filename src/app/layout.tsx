@@ -23,7 +23,6 @@ export const metadata: Metadata = {
 };
 
 async function Navbar() {
-  const { userId } = auth()
 
   const user = await currentUser()
 
