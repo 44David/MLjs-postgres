@@ -37,11 +37,11 @@ import {
 
 } from 'lucide-react';
 
-export default function Prompts() { 
+
+export default function  Prompts() { 
   const [userInput, setUserInput] = useState('');
   const [response, setResponse] = useState('');
-  const [instanceModel, setInstanceModel] = useState('')
-
+  const [instanceModel, setInstanceModel] = useState('');
 
 
   async function onSubmit(event:any) {  
@@ -59,9 +59,18 @@ export default function Prompts() {
 
     const result:Promise<string> = res.text();
 
+    const parsedResponse = JSON.parse(await result)
+    const formattedText = parsedResponse.response.replace(/\\n/g, '\n')
+
     //response ? setResponse( await result) : setResponse('Loading...')
-    setResponse(await result)
+    setResponse(formattedText)
+      
+
   }
+
+
+
+
 
   async function instanceSubmit(event:any) {
 
@@ -168,8 +177,11 @@ export default function Prompts() {
             <ChevronRight className='h-4 w-4' />
           </Button>
         </div>
-
-        <pre>{ response }</pre>
+          
+        <div style={{ whiteSpace: 'pre-wrap'}}>
+          {response}
+        </div>
+        
       </form>
     
     </>

@@ -5,8 +5,10 @@ import nim from '@api/nim';
 export async function POST(req: NextRequest) {
 
     const userReq = await req.text();
+    const model = await req.body
 
-    console.log("This is the req.body:", userReq)
+    console.log("This is the user request:", userReq)
+    console.log("This is the model chosen: ", model)
 
     const response = await ollama.chat({
       model: 'llama2',
