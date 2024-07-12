@@ -19,6 +19,8 @@ export const models = pgTable(
     size: text('size').notNull(),
     context_length: text('context_length').notNull(),
     variations: text('variations').notNull(),
+    data_type: text('data_type').notNull(),
+    hosted_where: text('hosted_where').notNull(),    
     createdAt: timestamp('createdAt').defaultNow().notNull(),
   },
 );
