@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
+
 import { toast } from "sonner"
 
 import {
@@ -34,6 +35,7 @@ import {
   SquarePlus, 
   Zap,
   X,
+  CircleAlert,
 
 } from 'lucide-react';
 
@@ -42,6 +44,7 @@ export default function Prompts() {
   const [userInput, setUserInput] = useState('');
   const [response, setResponse] = useState('');
   const [instanceModel, setInstanceModel] = useState('');
+  let showToast = true;
 
 
   async function onSubmit(event:any) {  
@@ -67,15 +70,17 @@ export default function Prompts() {
 
     const result:Promise<string> = res.text();
 
+    const resultStatus:number = res.status
+
+    if (resultStatus == 500) {
+      showToast = false
+    }
+
     const parsedResponse = JSON.parse(await result)
     const formattedText = parsedResponse.response.replace(/\\n/g, '\n')
 
-    //response ? setResponse( await result) : setResponse('Loading...')
     setResponse(formattedText)
-      
-
   }
-
 
   async function instanceSubmit(event:any) {
 
@@ -110,16 +115,27 @@ export default function Prompts() {
               </DialogHeader>
 
             <form
-              onSubmit={(event) => {
+              onSubmit={async (event) => {
                 wait().then(() => setOpen(false));
                 event.preventDefault()
-                toast("Instance created successfully", {
-                  action: {
-                    label: <X className='h-4 w-4' />,
-                    onClick: () => console.log() 
-                  }
-                })
-                onSubmit(event)
+                await onSubmit(event)
+
+                if (showToast) {
+                  toast("Instance created successfully", {
+                    action: {
+                      label: <X className='h-4 w-4' />,
+                      onClick: () => console.log() 
+                    }
+                  })
+                } else {
+                  toast("An error occurred. Do you have this model pulled/installed?", {
+                    action: {
+                      label:  <CircleAlert />,
+                      onClick: () => console.log() 
+                    }
+                  })
+
+                }
               }}
             >              
 
