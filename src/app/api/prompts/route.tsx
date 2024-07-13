@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import ollama from 'ollama'
 import nim from '@api/nim';
+import axios from 'axios'
 
 export async function POST(req: NextRequest) {
 
@@ -10,12 +11,29 @@ export async function POST(req: NextRequest) {
     console.log("This is the user request:", userInput)
     console.log("This is the model chosen: ", instanceModel)
 
-    const response = await ollama.chat({
-      model: instanceModel,
-      messages: [{role: 'user', content: userInput}],
-    })
+    try {
+      const getOllamaStatus = await axios.get("http://127.0.0.1:11434/")
+      console.log(getOllamaStatus.data)
 
-    // console.log(response.message.content);
+      const response = await ollama.chat({
+        model: instanceModel,
+        messages: [{role: 'user', content: userInput}],
+      })
+
+      return NextResponse.json({'response': response.message.content}, {'status': 200});
+
+
+    } catch (error) {
+      console.log("THIS WAS THE ERROR: ", error)
+
+      return NextResponse.json({'response': 'An error occurred when connecting to Ollama'}, 
+        {
+          status: 500,
+        }
+      )
+
+    }
+   
     
     // function nvidiaNimAPI() {
     //   nim.create_chat_completion_v1_chat_completions_post({
@@ -34,5 +52,5 @@ export async function POST(req: NextRequest) {
     //   .catch(err => console.error(err));
     // }
 
-    return NextResponse.json({'response': response.message.content});
+    
 }
