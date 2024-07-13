@@ -15,7 +15,7 @@ async function getModel(id:any) {
 } 
 
 //@ts-ignore
-export  default async function Install({ params }) {
+export default async function Install({ params }) {
 
     const modelInfo = await getModel(params.id)
     const parsedModelInfo = JSON.parse(JSON.stringify(modelInfo))
@@ -27,6 +27,12 @@ export  default async function Install({ params }) {
     }
     
     return (
-        <h1>Installing Selected model. This may take a couple minutes depending on your hardware </h1>
+        <>  
+            <div className='text-center'>
+            <h1>Installing Selected model. This may take a couple minutes depending on your hardware </h1>
+            <h1>Please ensure you have Ollama running in the terminal with <pre>ollama serve</pre></h1>
+            </div>
+        </>
+
     )
 }

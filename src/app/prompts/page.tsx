@@ -142,13 +142,13 @@ export default function Prompts() {
                 <Select value={instanceModel} onValueChange={setInstanceModel}>
 
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Installed Models" />
+                    <SelectValue placeholder="Select a model" />
                   </SelectTrigger>
                   
                     <SelectContent>
 
                       <SelectGroup>
-                        <SelectLabel>Default Models</SelectLabel>
+                        <SelectLabel>Ollama Models</SelectLabel>
                         <SelectItem value="Llama3">Llama3</SelectItem>
                         <SelectItem value="Mistral AI">Mistral AI</SelectItem>
                         <SelectItem value="Gemma">Gemma</SelectItem>
