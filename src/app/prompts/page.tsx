@@ -38,7 +38,7 @@ import {
 } from 'lucide-react';
 
 
-export default function  Prompts() { 
+export default function Prompts() { 
   const [userInput, setUserInput] = useState('');
   const [response, setResponse] = useState('');
   const [instanceModel, setInstanceModel] = useState('');
@@ -48,13 +48,21 @@ export default function  Prompts() {
 
     event.preventDefault();
 
-    // const formData = new FormData(event.currentTarget);
+    const combinedData = {
+      userInput: userInput,
+      instanceModel: instanceModel,
+    };
 
-    console.log("e.currentTarget: ", userInput)
+    console.log(JSON.stringify(combinedData))
+
+    //console.log("e.currentTarget: ", userInput)
 
     const res = await fetch('/api/prompts', {
       method: 'POST',
-      body: userInput,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(combinedData),
     });
 
     const result:Promise<string> = res.text();
@@ -69,16 +77,16 @@ export default function  Prompts() {
   }
 
 
-
-
-
   async function instanceSubmit(event:any) {
 
     event.preventDefault();
 
     await fetch('/api/prompts', {
       method: 'POST', 
-      body: instanceModel,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({"model": instanceModel})
     })
   }
 
@@ -108,11 +116,10 @@ export default function  Prompts() {
                 toast("Instance created successfully", {
                   action: {
                     label: <X className='h-4 w-4' />,
-                    onClick: () => console.log()
+                    onClick: () => console.log() 
                   }
                 })
-                instanceSubmit(event)
-                console.log(instanceModel)
+                onSubmit(event)
               }}
             >              
 

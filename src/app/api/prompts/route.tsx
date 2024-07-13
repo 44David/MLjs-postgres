@@ -4,15 +4,15 @@ import nim from '@api/nim';
 
 export async function POST(req: NextRequest) {
 
-    const userReq = await req.text();
-    const model = await req.body
+    const { userInput, instanceModel } = await req.json()
 
-    console.log("This is the user request:", userReq)
-    console.log("This is the model chosen: ", model)
+
+    console.log("This is the user request:", userInput)
+    console.log("This is the model chosen: ", instanceModel)
 
     const response = await ollama.chat({
-      model: 'llama2',
-      messages: [{role: 'user', content: userReq}],
+      model: instanceModel,
+      messages: [{role: 'user', content: userInput}],
     })
 
     // console.log(response.message.content);
@@ -34,7 +34,5 @@ export async function POST(req: NextRequest) {
     //   .catch(err => console.error(err));
     // }
 
-
     return NextResponse.json({'response': response.message.content});
-
 }
