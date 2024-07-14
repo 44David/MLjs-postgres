@@ -42,7 +42,7 @@ export default function Prompts() {
   const [userInput, setUserInput] = useState('');
   const [response, setResponse] = useState('');
   const [instanceModel, setInstanceModel] = useState('');
-  const [instances, setInstances] = useState(null);
+  const [instances, setInstances] = useState('');
   let showToast = true;
 
 
@@ -54,10 +54,6 @@ export default function Prompts() {
       userInput: userInput,
       instanceModel: instanceModel,
     };
-
-    console.log(JSON.stringify(combinedData))
-
-    //console.log("e.currentTarget: ", userInput)
 
     const res = await fetch('/api/prompts', {
       method: 'POST',
@@ -81,14 +77,27 @@ export default function Prompts() {
     setResponse(formattedText)
   }
 
-    useEffect(() => {
-      const fetchData = async () => {
-      fetch('/api/instances')
-        .then((res) => { const data:any = res.json()
-            .then(() => setInstances(data))
-         }
-    )}
 
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('/api/instances')
+        const data = await res.json()
+
+        console.log('JSON data ', JSON.parse(JSON.stringify(data)))
+
+        //@ts-ignore 
+        data.instances.forEach(element => {
+          console.log("id ", element.model_name)
+        });
+
+      } catch (error) {
+        console.error('Error fetching data ', error)
+      }
+    };
+    fetchData()
+  }, [])
 
   const [open, setOpen] = React.useState(false);
 
@@ -170,11 +179,6 @@ export default function Prompts() {
 
 
           <div className='border border-gray-400 w-full'>
-            {instances.map(instance => (
-              <>
-                <h3>{instance.model_name}</h3>
-              </>
-            ))}
           </div>
 
 

@@ -37,11 +37,11 @@ async function Navbar() {
 
       <SignedIn>
         <Link href={'/models'}>
-          <div>Models <Bot /></div>
+          <div>Models</div>
         </Link>
 
         <Link href={'/prompts'}> 
-          Instances <Zap /> 
+          Instances
         </Link>
 
         <UserButton />
