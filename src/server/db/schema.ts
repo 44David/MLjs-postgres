@@ -25,6 +25,19 @@ export const models = pgTable(
   },
 );
 
+export const Instances = pgTable(
+  'Instances',
+  {
+    id: uuid('id')
+    .primaryKey()
+    .defaultRandom()
+    .unique()
+    .notNull(),
+    model_name: text('model_name').notNull(),
+    model_id: text('model_id').notNull(),
+    createdAt: timestamp('createdAt').defaultNow().notNull(),
+  }
+)
 
 
 export const Users = pgTable(

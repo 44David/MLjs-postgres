@@ -43,8 +43,7 @@ export default function Models() {
                             <DropdownMenuContent>
                                 <DropdownMenuLabel>Choose how to host</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem><Link href={`/models/install/${modelInfo.id}`}>Host with NVIDIA Nim</Link></DropdownMenuItem>
-                                <DropdownMenuItem>Host with Ollama</DropdownMenuItem>
+                                <DropdownMenuItem><Link href={`/models/install/${modelInfo.id}`}>Host with Ollama</Link></DropdownMenuItem>
                             </DropdownMenuContent>           
                         </DropdownMenu>
 

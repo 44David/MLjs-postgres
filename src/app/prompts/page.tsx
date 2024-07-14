@@ -1,6 +1,4 @@
 'use client'
-import ollama, { Message } from 'ollama';
-import { z } from 'zod';
 import { useState } from 'react';
 import { db } from "@/server/db";
 import Link from 'next/link';
@@ -15,7 +13,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
-
 import { toast } from "sonner"
 
 import {
@@ -29,6 +26,7 @@ import {
 } from "@/components/ui/select"
 
 import React from 'react'
+import { useEffect } from 'react';
 
 import { 
   ChevronRight, 
@@ -44,6 +42,7 @@ export default function Prompts() {
   const [userInput, setUserInput] = useState('');
   const [response, setResponse] = useState('');
   const [instanceModel, setInstanceModel] = useState('');
+  const [instances, setInstances] = useState(null);
   let showToast = true;
 
 
@@ -82,18 +81,14 @@ export default function Prompts() {
     setResponse(formattedText)
   }
 
-  async function instanceSubmit(event:any) {
+    useEffect(() => {
+      const fetchData = async () => {
+      fetch('/api/instances')
+        .then((res) => { const data:any = res.json()
+            .then(() => setInstances(data))
+         }
+    )}
 
-    event.preventDefault();
-
-    await fetch('/api/prompts', {
-      method: 'POST', 
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({"model": instanceModel})
-    })
-  }
 
   const [open, setOpen] = React.useState(false);
 
@@ -101,7 +96,6 @@ export default function Prompts() {
 
   return (
     <>
-
       <div className="float-left border-r-2 h-screen w-1/6 pr-10">
     
           <Dialog open={open} onOpenChange={setOpen}>
@@ -134,7 +128,6 @@ export default function Prompts() {
                       onClick: () => console.log() 
                     }
                   })
-
                 }
               }}
             >              
@@ -177,8 +170,14 @@ export default function Prompts() {
 
 
           <div className='border border-gray-400 w-full'>
-            {instanceModel}
+            {instances.map(instance => (
+              <>
+                <h3>{instance.model_name}</h3>
+              </>
+            ))}
           </div>
+
+
       </div>
 
 
@@ -209,6 +208,9 @@ export default function Prompts() {
     
     </>
   )
+
+
+
 
   // sample API request 
   // function nvidiaNimAPI() {
