@@ -125,7 +125,7 @@ export default function Prompts() {
 
                 if (showToast) {
                   toast("Instance created successfully", {
-                    action: {
+                    action: { 
                       label: <X className='h-4 w-4' />,
                       onClick: () => console.log() 
                     }

@@ -12,7 +12,6 @@ import Link from "next/link";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { Toaster } from "@/components/ui/sonner";
 
-import { Zap, Bot } from 'lucide-react';
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,7 +24,6 @@ export const metadata: Metadata = {
 async function Navbar() {
 
   const user = await currentUser()
-
 
   return (
     <nav className="flex justify-between w-full p-4 mb-4 text-xl font-semibold border-b-4">
