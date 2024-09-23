@@ -151,7 +151,7 @@ export default function Prompts() {
 
                       <SelectGroup>
                         <SelectLabel>Ollama Models</SelectLabel>
-                        <SelectItem value="Llama3">Llama3</SelectItem>
+                        <SelectItem value="llama3">Llama3</SelectItem>
                         <SelectItem value="Mistral AI">Mistral AI</SelectItem>
                         <SelectItem value="Gemma">Gemma</SelectItem>
                       </SelectGroup>

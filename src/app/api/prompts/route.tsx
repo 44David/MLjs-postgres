@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import ollama from 'ollama'
-import nim from '@api/nim';
 import axios from 'axios'
 
 export async function POST(req: NextRequest) {
