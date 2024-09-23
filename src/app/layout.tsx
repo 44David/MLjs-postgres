@@ -11,6 +11,14 @@ import {
 import Link from "next/link";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { Toaster } from "@/components/ui/sonner";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 
 
@@ -37,6 +45,15 @@ async function Navbar() {
         <Link href={'/models'}>
           <div>Models</div>
         </Link>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger>Models</DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem><Link href={"models"}>Locally Installed Models</Link></DropdownMenuItem>
+            <DropdownMenuItem>Search for Models</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         <Link href={'/prompts'}> 
           Instances
